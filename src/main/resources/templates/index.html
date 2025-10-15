@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shojo_anime</title>
+    <link rel="icon" type="image/x-icon" href="/shojo_anime.png" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search"
+    />
+      <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+      <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<!--      <script>-->
+<!--          tailwind.config = {-->
+<!--            plugins: [daisyui],-->
+<!--            daisyui: {-->
+<!--              themes: ["light", "dark", "cupcake", "valentine"],-->
+<!--            },-->
+<!--          }-->
+<!--      </script>-->
+    <script th:src="@{/js/index.js}" defer></script>
+  </head>
+  <body style="background-image:url(/bgBody.jpg)" class="bg-cover bg-no-repeat bg-fixed">
+    <nav class="flex justify-between items-center p-2 border-b border-black">
+      <div class="logo h-14 ml-10 flex items-center gap-2">
+        <img
+          src="/shojo_anime.png"
+          alt="logo"
+          class="h-full rounded-full w-14"
+        />
+        <p class="font-bold text-2xl">Shojo_anime</p>
+      </div>
+      <div
+        class="search flex items-center border border-black rounded-full px-4 py-2 flex-1 max-w-md mx-auto justify-start relative"
+      >
+        <input
+          type="text"
+          placeholder="Search"
+          class="border-none outline-none"
+        />
+        <span class="material-symbols-outlined absolute right-4"> search </span>
+        <div
+          class="search_results bg-white border border-black rounded-md w-96 max-h-96 z-10 overlay_search absolute top-12 right-[3rem] hidden overflow-y-auto"
+        >
+          <ul>
+            <li
+              class="p-2 border-b border-black hover:bg-gray-200 cursor-pointer"
+            >
+              Result 1
+            </li>
+            <li
+              class="p-2 border-b border-black hover:bg-gray-200 cursor-pointer"
+            >
+              Result 2
+            </li>
+            <li
+              class="p-2 border-b border-black hover:bg-gray-200 cursor-pointer"
+            >
+              Result 3
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <h1 class="text-2xl font-bold mb-4">Top Anime</h1>
+        <div class="flex flex-col">
+
+
+    <div class="container grid grid-cols-3 gap-4 mx-auto items-start">
+      <div
+        th:if="${anime != null and anime.data != null}"
+        class="flex justify-center"
+        th:each="a : ${anime.data}"
+        th:key="${a.id}"
+
+      >
+              <div class="card bg-base-100 w-96 shadow-sm">
+                  <figure>
+                      <img
+                              th:src="${a.imgSrc}"
+                              alt="image"
+                      />
+                  </figure>
+                  <div class="card-body">
+                      <h2 th:text="${a.attributes.title.en==null?a.attributes.en:a.attributes.title.en}" class="card-title line-clamp-1"></h2>
+                      <p  th:text="${a.attributes.description.en==null?a.attributes.description:a.attributes.description.en}" class="line-clamp-3 description   transition-all cursor-pointer transition-300 ease-in-out"></p>
+<!--                      <div class="card-actions justify-end">-->
+<!--                          <button class="btn btn-primary">Buy Now</button>-->
+<!--                      </div>-->
+                  </div>
+              </div>
+
+      </div>
+    </div>
+        </div>
+    </main>
+  </body>
+</html>
