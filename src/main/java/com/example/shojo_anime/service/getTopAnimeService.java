@@ -16,15 +16,18 @@ public class getTopAnimeService {
     RestTemplate restTemplate;
     @Autowired
     public final getCoverImageFileName getCover;
+
     public getTopAnimeService(getCoverImageFileName getCover) {
         this.getCover = getCover;
     }
+
     public TopAnimesList getTopAnime() {
         String url = "https://api.mangadex.org/manga?publicationDemographic[]=shoujo&limit=10&order[followedCount]=desc";
         ResponseEntity<TopAnimesList> response = restTemplate.getForEntity(url, TopAnimesList.class);
-        if (response.getBody() != null) {
-            getCover.getFileName(response.getBody());
-        }
+
+        // if (response.getBody() != null) {
+        // getCover.getFileName(response.getBody());
+        // }
         return response.getBody();
     }
 
